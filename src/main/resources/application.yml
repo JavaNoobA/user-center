@@ -7,3 +7,13 @@ spring:
       # >= 6.x: com.mysql.cj.jdbc.Driver
       # <= 5.x: com.mysql.jdbc.Driver
       driver-class-name: com.mysql.cj.jdbc.Driver
+
+  application:
+    name: user-center
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        # namespace: e13a3310-dd0f-4d64-8d12-6785b0507055
+        # cluster-name: BJ
+
