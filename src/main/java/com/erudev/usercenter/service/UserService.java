@@ -2,6 +2,7 @@ package com.erudev.usercenter.service;
 
 import com.erudev.usercenter.dao.bonus.BonusEventLogMapper;
 import com.erudev.usercenter.dao.user.UserMapper;
+import com.erudev.usercenter.domain.dto.user.UserLoginDTO;
 import com.erudev.usercenter.domain.entity.bonus.BonusEventLog;
 import com.erudev.usercenter.domain.entity.user.User;
 import com.erudev.usercenter.domain.message.UserAddBonusMsgDTO;
@@ -48,5 +49,24 @@ public class UserService {
                         .build()
         );
         log.info("积分添加完毕...");
+    }
+
+    public User login(UserLoginDTO userLoginDTO, String openId) {
+        User user = userMapper.selectOne(User.builder().wxId(openId).build());
+
+        if (user == null) {
+            User userToSave = User.builder()
+                    .wxId(openId)
+                    .bonus(300)
+                    .wxNickname(userLoginDTO.getWxNickname())
+                    .avatarUrl(userLoginDTO.getAvatarUrl())
+                    .roles("user")
+                    .createTime(new Date())
+                    .updateTime(new Date())
+                    .build();
+            userMapper.insertSelective(userToSave);
+            return userToSave;
+        }
+        return user;
     }
 }
