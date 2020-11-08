@@ -15,5 +15,20 @@ spring:
       discovery:
         server-addr: localhost:8848
         # namespace: e13a3310-dd0f-4d64-8d12-6785b0507055
-        # cluster-name: BJ
+        cluster-name: BJ
+    stream:
+      rocketmq:
+        binder:
+          name-server: 127.0.0.1:9876
+        bindings:
+          input:
+            destination: add-bonus
+            group: binder-group
+
+
+server:
+  port: 8030
+
+rocketmq:
+  name-server: 127.0.0.1:9876
 
