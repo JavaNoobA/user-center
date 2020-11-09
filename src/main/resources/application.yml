@@ -24,7 +24,12 @@ spring:
           input:
             destination: add-bonus
             group: binder-group
-
+  zipkin:
+    base-url: http://localhost:9411/
+  sleuth:
+    sampler:
+      # 抽样率 默认是0.1
+      probability: 1
 
 server:
   port: 8030
